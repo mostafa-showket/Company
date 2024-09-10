@@ -1,4 +1,5 @@
 ﻿using Company.BLL.Interfaces;
+using Company.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Company.PL.Controllers
@@ -16,6 +17,27 @@ namespace Company.PL.Controllers
         {
             var departments = _departmentRepositry.GetAll();
             return View(departments);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Department model)
+        {
+            if (ModelState.IsValid)
+            {
+                var Count = _departmentRepositry.Add(model);
+                if (Count > 0)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+
+            return View(model);
         }
     }
 }
