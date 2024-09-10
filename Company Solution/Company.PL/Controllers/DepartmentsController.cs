@@ -74,5 +74,30 @@ namespace Company.PL.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult Delete(int? id)
+        {
+            if (id is null) return BadRequest(); // 400
+            var department = _departmentRepositry.Get(id.Value);
+
+            if (department is null) return NotFound(); // 404
+
+            return View(department);
+        }
+
+        public IActionResult Delete(Department model)
+        {
+            if (ModelState.IsValid)
+            {
+                var Count = _departmentRepositry.Delete(model);
+                if (Count > 0)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+
+            return View(model);
+        }
     }
 }
