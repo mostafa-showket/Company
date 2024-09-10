@@ -49,5 +49,30 @@ namespace Company.PL.Controllers
 
             return View(department);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            if (id is null) return BadRequest(); // 400
+            var department = _departmentRepositry.Get(id.Value);
+
+            if (department is null) return NotFound(); // 404
+
+            return View(department);
+        }
+
+        public IActionResult Edit(Department model)
+        {
+            if (ModelState.IsValid)
+            {
+                var Count = _departmentRepositry.Update(model);
+                if (Count > 0)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+
+            return View(model);
+        }
     }
 }
