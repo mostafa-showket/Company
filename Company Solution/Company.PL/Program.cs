@@ -1,3 +1,5 @@
+using Company.BLL.Interfaces;
+using Company.BLL.Repositories;
 using Company.DAL.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +19,7 @@ namespace Company.PL
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             }); // Allow DI for AppDbContext
+            builder.Services.AddScoped<IDepartmentRespository, DepartmentRepositry>();
 
             var app = builder.Build();
 

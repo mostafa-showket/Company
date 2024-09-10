@@ -4,7 +4,7 @@ using Company.DAL.Models;
 
 namespace Company.BLL.Repositories
 {
-    internal class DepartmentRepositry : IDepartmentRespository
+    public class DepartmentRepositry : IDepartmentRespository
     {
         private readonly AppDbContext _context;
 
