@@ -1,3 +1,5 @@
+using Company.DAL.Data.Contexts;
+
 namespace Company.PL
 {
     public class Program
@@ -8,6 +10,9 @@ namespace Company.PL
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            //builder.Services.AddScoped<AppDbContext>(); // Allow DI for AppDbContext
+            builder.Services.AddDbContext<AppDbContext>(); // Allow DI for AppDbContext
 
             var app = builder.Build();
 

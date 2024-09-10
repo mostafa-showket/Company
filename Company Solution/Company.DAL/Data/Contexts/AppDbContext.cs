@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Company.DAL.Data.Contexts
 {
-    internal class AppDbContext : DbContext
+    public class AppDbContext : DbContext
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
