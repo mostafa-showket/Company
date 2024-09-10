@@ -1,4 +1,5 @@
 using Company.DAL.Data.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Company.PL
 {
@@ -12,7 +13,10 @@ namespace Company.PL
             builder.Services.AddControllersWithViews();
 
             //builder.Services.AddScoped<AppDbContext>(); // Allow DI for AppDbContext
-            builder.Services.AddDbContext<AppDbContext>(); // Allow DI for AppDbContext
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            }); // Allow DI for AppDbContext
 
             var app = builder.Build();
 
