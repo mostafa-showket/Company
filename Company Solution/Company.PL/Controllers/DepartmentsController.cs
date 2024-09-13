@@ -26,6 +26,7 @@ namespace Company.PL.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(Department model)
         {
             if (ModelState.IsValid)
@@ -61,15 +62,25 @@ namespace Company.PL.Controllers
             return View(department);
         }
 
-        public IActionResult Edit(Department model)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit([FromRoute] int? id, Department model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var Count = _departmentRepositry.Update(model);
-                if (Count > 0)
+                if (id != model.Id) return BadRequest();
+
+                if (ModelState.IsValid)
                 {
-                    return RedirectToAction("Index");
+                    var Count = _departmentRepositry.Update(model);
+                    if (Count > 0)
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
+            }catch(Exception ex)
+            {
+                ModelState.AddModelError(string.Empty,ex.Message);
             }
 
             return View(model);
