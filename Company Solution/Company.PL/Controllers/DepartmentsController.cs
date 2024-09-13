@@ -78,9 +78,10 @@ namespace Company.PL.Controllers
                         return RedirectToAction("Index");
                     }
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty,ex.Message);
+                ModelState.AddModelError(string.Empty, ex.Message);
             }
 
             return View(model);
@@ -97,15 +98,26 @@ namespace Company.PL.Controllers
             return View(department);
         }
 
-        public IActionResult Delete(Department model)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete([FromRoute] int? id, Department model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var Count = _departmentRepositry.Delete(model);
-                if (Count > 0)
+                if (id != model.Id) return BadRequest();
+
+                if (ModelState.IsValid)
                 {
-                    return RedirectToAction("Index");
+                    var Count = _departmentRepositry.Delete(model);
+                    if (Count > 0)
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
             }
 
             return View(model);
