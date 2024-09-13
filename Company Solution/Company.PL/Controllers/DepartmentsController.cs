@@ -41,25 +41,26 @@ namespace Company.PL.Controllers
             return View(model);
         }
 
-        public IActionResult Details(int? id)
+        public IActionResult Details(int? id, string viewName = "Details")
         {
             if (id is null) return BadRequest(); // 400
             var department = _departmentRepositry.Get(id.Value);
 
             if (department is null) return NotFound(); // 404
 
-            return View(department);
+            return View(viewName, department);
         }
 
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-            if (id is null) return BadRequest(); // 400
-            var department = _departmentRepositry.Get(id.Value);
+            //if (id is null) return BadRequest(); // 400
+            //var department = _departmentRepositry.Get(id.Value);
 
-            if (department is null) return NotFound(); // 404
+            //if (department is null) return NotFound(); // 404
 
-            return View(department);
+            //return View(department);
+            return Details(id, "Edit");
         }
 
         [HttpPost]
@@ -90,12 +91,13 @@ namespace Company.PL.Controllers
         [HttpGet]
         public IActionResult Delete(int? id)
         {
-            if (id is null) return BadRequest(); // 400
-            var department = _departmentRepositry.Get(id.Value);
+            //if (id is null) return BadRequest(); // 400
+            //var department = _departmentRepositry.Get(id.Value);
 
-            if (department is null) return NotFound(); // 404
+            //if (department is null) return NotFound(); // 404
 
-            return View(department);
+            //return View(department);
+            return Details(id, "Delete");
         }
 
         [HttpPost]
