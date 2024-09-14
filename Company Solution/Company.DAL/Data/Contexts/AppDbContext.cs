@@ -1,5 +1,4 @@
-﻿using Company.DAL.Data.Configurations;
-using Company.DAL.Models;
+﻿using Company.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -9,7 +8,7 @@ namespace Company.DAL.Data.Contexts
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,5 +25,6 @@ namespace Company.DAL.Data.Contexts
         //}
 
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }
