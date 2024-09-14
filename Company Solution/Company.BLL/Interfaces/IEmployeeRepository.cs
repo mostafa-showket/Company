@@ -2,7 +2,7 @@
 
 namespace Company.BLL.Interfaces
 {
-    internal interface IEmployeeRepository : IGenericRepository<Employee>
+    public interface IEmployeeRepository : IGenericRepository<Employee>
     {
     }
 }

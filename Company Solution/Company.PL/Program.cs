@@ -20,6 +20,7 @@ namespace Company.PL
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             }); // Allow DI for AppDbContext
             builder.Services.AddScoped<IDepartmentRespository, DepartmentRepositry>();
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
             var app = builder.Build();
 

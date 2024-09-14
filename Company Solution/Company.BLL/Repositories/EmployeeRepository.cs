@@ -4,7 +4,7 @@ using Company.DAL.Models;
 
 namespace Company.BLL.Repositories
 {
-    internal class EmployeeRepository : GenericRepository<Employee>, IEmployeeRepository
+    public class EmployeeRepository : GenericRepository<Employee>, IEmployeeRepository
     {
         public EmployeeRepository(AppDbContext context) : base(context)
         {
