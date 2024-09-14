@@ -2,12 +2,7 @@
 
 namespace Company.BLL.Interfaces
 {
-    internal interface IEmployeeRepository
+    internal interface IEmployeeRepository : IGenericRepository<Employee>
     {
-        IEnumerable<Employee> GetAll();
-        Employee Get(int id);
-        int Add(Employee entity);
-        int Update(Employee entity);
-        int Delete(Employee entity);
     }
 }

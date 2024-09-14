@@ -4,37 +4,10 @@ using Company.DAL.Models;
 
 namespace Company.BLL.Repositories
 {
-    internal class EmployeeRepository : IEmployeeRepository
+    internal class EmployeeRepository : GenericRepository<Employee>, IEmployeeRepository
     {
-        private readonly AppDbContext _context;
-
-        public EmployeeRepository(AppDbContext context)
+        public EmployeeRepository(AppDbContext context) : base(context)
         {
-            _context = context;
-        }
-
-        public IEnumerable<Employee> GetAll() => _context.Employees.ToList();
-
-
-        public Employee Get(int id) => _context.Employees.Find(id);
-
-
-        public int Add(Employee entity)
-        {
-            _context.Employees.Add(entity);
-            return _context.SaveChanges();
-        }
-
-        public int Update(Employee entity)
-        {
-            _context.Employees.Update(entity);
-            return _context.SaveChanges();
-        }
-
-        public int Delete(Employee entity)
-        {
-            _context.Employees.Remove(entity);
-            return _context.SaveChanges();
         }
     }
 }

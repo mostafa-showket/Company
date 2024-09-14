@@ -2,13 +2,8 @@
 
 namespace Company.DAL.Models
 {
-    public class Employee
+    public class Employee : BaseEntity
     {
-        public int Id { get; set; }
-
-        [Required(ErrorMessage = "Name is Required!!")]
-        public string Name { get; set; }
-
         [Range(25, 60, ErrorMessage = "Age must be between 25 and 60")]
         public int? Age { get; set; }
 
