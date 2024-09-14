@@ -9,46 +9,7 @@
 <br />
 
 <form asp-action="Create">
-    <div class="form-group">
-        <label asp-for="@Model.Name" class="col-form-label"></label>
-        <input asp-for="@Model.Name" class="form-control" />
-        <span asp-validation-for="@Model.Name" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.Age" class="col-form-label"></label>
-        <input asp-for="@Model.Age" class="form-control" />
-        <span asp-validation-for="@Model.Age" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.Address" class="col-form-label"></label>
-        <input asp-for="@Model.Address" class="form-control" />
-        <span asp-validation-for="@Model.Address" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.Email" class="col-form-label"></label>
-        <input asp-for="@Model.Email" class="form-control" />
-        <span asp-validation-for="@Model.Email" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.Salary" class="col-form-label"></label>
-        <input asp-for="@Model.Salary" class="form-control" />
-        <span asp-validation-for="@Model.Salary" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.PhoneNumber" class="col-form-label"></label>
-        <input asp-for="@Model.PhoneNumber" class="form-control" />
-        <span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.IsActive" class="col-form-label"></label>
-        <input asp-for="@Model.IsActive" class="form-check" />
-        <span asp-validation-for="@Model.IsActive" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.HiringDate" class="col-form-label"></label>
-        <input asp-for="@Model.HiringDate" class="form-control" />
-        <span asp-validation-for="@Model.HiringDate" class="text-danger"></span>
-    </div>
+    <partial name="PartialViews/EditCreateEmployeePartialView" model="@Model" />
 
     <div class="d-flex mt-4 gap-2">
         <input type="submit" value="Create" class="btn btn-primary" />

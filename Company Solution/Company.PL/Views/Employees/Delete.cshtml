@@ -9,38 +9,7 @@
 <br />
 
 <form asp-action="Delete">
-    <div class="form-group">
-        <label asp-for="@Model.Name" class="col-form-label"></label>
-        <input asp-for="@Model.Name" class="form-control" readonly />
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.Age" class="col-form-label"></label>
-        <input asp-for="@Model.Age" class="form-control" readonly />
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.Address" class="col-form-label"></label>
-        <input asp-for="@Model.Address" class="form-control" readonly />
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.Email" class="col-form-label"></label>
-        <input asp-for="@Model.Email" class="form-control" readonly />
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.Salary" class="col-form-label"></label>
-        <input asp-for="@Model.Salary" class="form-control" readonly />
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.PhoneNumber" class="col-form-label"></label>
-        <input asp-for="@Model.PhoneNumber" class="form-control" readonly />
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.IsActive" class="col-form-label"></label>
-        <input asp-for="@Model.IsActive" class="form-check" readonly />
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.HiringDate" class="col-form-label"></label>
-        <input asp-for="@Model.HiringDate" class="form-control" readonly />
-    </div>
+    <partial name="PartialViews/DeleteDetailsEmployeePartialView" />
 
     <div class="d-flex mt-4 gap-2">
         <input type="submit" value="Delete" class="btn btn-danger" />

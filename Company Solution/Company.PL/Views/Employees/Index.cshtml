@@ -40,9 +40,7 @@
                     <td>@Html.DisplayFor(E => employee.Salary)</td>
                     <td>@Html.DisplayFor(E => employee.IsActive)</td>
                     <td>@employee.HiringDate</td>
-                    <td><a asp-action="Details" asp-route-id="@employee.Id" class="btn btn-warning">Details</a></td>
-                    <td><a asp-action="Edit" asp-route-id="@employee.Id" class="btn btn-success">Update</a></td>
-                    <td><a asp-action="Delete" asp-route-id="@employee.Id" class="btn btn-danger">Delete</a></td>
+                    <partial name="_ButtonPartialView" model="@employee.Id" />
                 </tr>
             }
         </tbody>
