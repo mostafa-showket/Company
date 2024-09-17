@@ -1,3 +1,4 @@
+using Company.BLL;
 using Company.BLL.Interfaces;
 using Company.BLL.Repositories;
 using Company.DAL.Data.Contexts;
@@ -21,8 +22,9 @@ namespace Company.PL
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             }); // Allow DI for AppDbContext
-            builder.Services.AddScoped<IDepartmentRespository, DepartmentRepositry>();
-            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            //builder.Services.AddScoped<IDepartmentRespository, DepartmentRepositry>();
+            //builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddScoped<IUnitOfwork, UnitOfWork>();
             builder.Services.AddAutoMapper(typeof(EmployeeProfile));
 
             // Life Time

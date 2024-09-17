@@ -1,4 +1,5 @@
-﻿using Company.BLL.Interfaces;
+﻿using Company.BLL;
+using Company.BLL.Interfaces;
 using Company.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,16 +7,16 @@ namespace Company.PL.Controllers
 {
     public class DepartmentsController : Controller
     {
-        private readonly IDepartmentRespository _departmentRepositry;
+        private readonly IUnitOfwork _unitOfwork;
 
-        public DepartmentsController(IDepartmentRespository departmentRepositry) // Ask CLR to Create object from DepartmentRepositry
+        public DepartmentsController(IUnitOfwork unitOfwork) // Ask CLR to Create object from DepartmentRepositry
         {
-            _departmentRepositry = departmentRepositry;
+            _unitOfwork = unitOfwork;
         }
 
         public IActionResult Index()
         {
-            var departments = _departmentRepositry.GetAll();
+            var departments = _unitOfwork.DepartmentRespository.GetAll();
             return View(departments);
         }
 
@@ -31,7 +32,7 @@ namespace Company.PL.Controllers
         {
             if (ModelState.IsValid)
             {
-                var Count = _departmentRepositry.Add(model);
+                var Count = _unitOfwork.DepartmentRespository.Add(model);
                 if (Count > 0)
                 {
                     return RedirectToAction("Index");
@@ -44,7 +45,7 @@ namespace Company.PL.Controllers
         public IActionResult Details(int? id, string viewName = "Details")
         {
             if (id is null) return BadRequest(); // 400
-            var department = _departmentRepositry.Get(id.Value);
+            var department = _unitOfwork.DepartmentRespository.Get(id.Value);
 
             if (department is null) return NotFound(); // 404
 
@@ -73,7 +74,7 @@ namespace Company.PL.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    var Count = _departmentRepositry.Update(model);
+                    var Count = _unitOfwork.DepartmentRespository.Update(model);
                     if (Count > 0)
                     {
                         return RedirectToAction("Index");
@@ -110,7 +111,7 @@ namespace Company.PL.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    var Count = _departmentRepositry.Delete(model);
+                    var Count = _unitOfwork.DepartmentRespository.Delete(model);
                     if (Count > 0)
                     {
                         return RedirectToAction("Index");
