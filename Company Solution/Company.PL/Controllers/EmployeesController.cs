@@ -1,4 +1,5 @@
-﻿using Company.BLL.Interfaces;
+﻿using AutoMapper;
+using Company.BLL.Interfaces;
 using Company.DAL.Models;
 using Company.PL.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -10,26 +11,27 @@ namespace Company.PL.Controllers
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IDepartmentRespository _departmentRespository;
+        private readonly IMapper _mapper;
 
-        public EmployeesController(IEmployeeRepository employeeRepository, IDepartmentRespository departmentRespository)
+        public EmployeesController(IEmployeeRepository employeeRepository, 
+            IDepartmentRespository departmentRespository,
+            IMapper mapper)
         {
             _employeeRepository = employeeRepository;
             _departmentRespository = departmentRespository;
+            _mapper = mapper;
         }
 
         public IActionResult Index(string searchInput)
         {
-            var employees = Enumerable.Empty<Employee>();
+            var result = Enumerable.Empty<Employee>();
             var employeesViewModel = new Collection<EmployeeViewModel>();
 
-            if (string.IsNullOrEmpty(searchInput)) employees = _employeeRepository.GetAll();
-            else employees = _employeeRepository.GetByName(searchInput);
+            if (string.IsNullOrEmpty(searchInput)) result = _employeeRepository.GetAll();
+            else result = _employeeRepository.GetByName(searchInput);
 
-            foreach (var employee in employees)
-            {
-                employeesViewModel.Add(new EmployeeViewModel() { });
-                
-            }
+            // AutoMapping
+            var employees = _mapper.Map<IEnumerable<EmployeeViewModel>>(result);
 
             //string Message = "Hello World";
 
@@ -72,21 +74,23 @@ namespace Company.PL.Controllers
                 // Casting : EmployeeViewModel --> Employee
                 // Manual Mapping 
 
-                Employee employee = new Employee()
-                {
-                    Name = model.Name,
-                    Address = model.Address,
-                    Age = model.Age,
-                    Salary = model.Salary,
-                    PhoneNumber = model.PhoneNumber,
-                    Email = model.Email,
-                    IsActive = model.IsActive,
-                    IsDeleted = model.IsDeleted,
-                    DateOfCreation = model.DateOfCreation,
-                    HiringDate = model.HiringDate,
-                    WorkFor = model.WorkFor,
-                    WorkForId = model.WorkForId
-                };
+                //Employee employee = new Employee()
+                //{
+                //    Name = model.Name,
+                //    Address = model.Address,
+                //    Age = model.Age,
+                //    Salary = model.Salary,
+                //    PhoneNumber = model.PhoneNumber,
+                //    Email = model.Email,
+                //    IsActive = model.IsActive,
+                //    IsDeleted = model.IsDeleted,
+                //    DateOfCreation = model.DateOfCreation,
+                //    HiringDate = model.HiringDate,
+                //    WorkFor = model.WorkFor,
+                //    WorkForId = model.WorkForId
+                //};
+
+                Employee employee = _mapper.Map<Employee>(model);
 
                 var count = _employeeRepository.Add(employee);
                 if (count > 0)
@@ -108,7 +112,7 @@ namespace Company.PL.Controllers
         {
             if (id is null) return BadRequest();
 
-            var employee = _employeeRepository.Get(id.Value);
+            var employee = _mapper.Map<EmployeeViewModel>(_employeeRepository.Get(id.Value));
 
             if (employee is null) return NotFound();
 
@@ -134,21 +138,23 @@ namespace Company.PL.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    Employee employee = new Employee()
-                    {
-                        Name = model.Name,
-                        Address = model.Address,
-                        Age = model.Age,
-                        Salary = model.Salary,
-                        PhoneNumber = model.PhoneNumber,
-                        Email = model.Email,
-                        IsActive = model.IsActive,
-                        IsDeleted = model.IsDeleted,
-                        DateOfCreation = model.DateOfCreation,
-                        HiringDate = model.HiringDate,
-                        WorkFor = model.WorkFor,
-                        WorkForId = model.WorkForId
-                    };
+                    //Employee employee = new Employee()
+                    //{
+                    //    Name = model.Name,
+                    //    Address = model.Address,
+                    //    Age = model.Age,
+                    //    Salary = model.Salary,
+                    //    PhoneNumber = model.PhoneNumber,
+                    //    Email = model.Email,
+                    //    IsActive = model.IsActive,
+                    //    IsDeleted = model.IsDeleted,
+                    //    DateOfCreation = model.DateOfCreation,
+                    //    HiringDate = model.HiringDate,
+                    //    WorkFor = model.WorkFor,
+                    //    WorkForId = model.WorkForId
+                    //};
+
+                    Employee employee =_mapper.Map<Employee>(model);
 
                     var count = _employeeRepository.Update(employee);
                     if (count > 0)
@@ -180,6 +186,8 @@ namespace Company.PL.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    Employee employee = _mapper.Map<Employee>(model);
+
                     var count = _employeeRepository.Delete(model);
                     if (count > 0)
                     {

@@ -1,8 +1,7 @@
-﻿@model Employee
+﻿@model EmployeeViewModel
 
 @{
     var departments = new SelectList(ViewData["Departments"] as IEnumerable<Department>, "Id", "Name");
-
 }
 
 <div class="form-group">

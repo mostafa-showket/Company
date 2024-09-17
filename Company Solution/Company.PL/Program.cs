@@ -1,6 +1,7 @@
 using Company.BLL.Interfaces;
 using Company.BLL.Repositories;
 using Company.DAL.Data.Contexts;
+using Company.PL.Mapping;
 using Company.PL.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +23,7 @@ namespace Company.PL
             }); // Allow DI for AppDbContext
             builder.Services.AddScoped<IDepartmentRespository, DepartmentRepositry>();
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddAutoMapper(typeof(EmployeeProfile));
 
             // Life Time
             //builder.Services.AddScoped();     // LifeTime Per Request, object Unreachable
