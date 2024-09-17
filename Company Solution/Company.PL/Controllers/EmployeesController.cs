@@ -1,6 +1,8 @@
 ﻿using Company.BLL.Interfaces;
 using Company.DAL.Models;
+using Company.PL.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.ObjectModel;
 
 namespace Company.PL.Controllers
 {
@@ -18,8 +20,16 @@ namespace Company.PL.Controllers
         public IActionResult Index(string searchInput)
         {
             var employees = Enumerable.Empty<Employee>();
+            var employeesViewModel = new Collection<EmployeeViewModel>();
+
             if (string.IsNullOrEmpty(searchInput)) employees = _employeeRepository.GetAll();
             else employees = _employeeRepository.GetByName(searchInput);
+
+            foreach (var employee in employees)
+            {
+                employeesViewModel.Add(new EmployeeViewModel() { });
+                
+            }
 
             //string Message = "Hello World";
 
@@ -55,11 +65,30 @@ namespace Company.PL.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Employee model)
+        public IActionResult Create(EmployeeViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var count = _employeeRepository.Add(model);
+                // Casting : EmployeeViewModel --> Employee
+                // Manual Mapping 
+
+                Employee employee = new Employee()
+                {
+                    Name = model.Name,
+                    Address = model.Address,
+                    Age = model.Age,
+                    Salary = model.Salary,
+                    PhoneNumber = model.PhoneNumber,
+                    Email = model.Email,
+                    IsActive = model.IsActive,
+                    IsDeleted = model.IsDeleted,
+                    DateOfCreation = model.DateOfCreation,
+                    HiringDate = model.HiringDate,
+                    WorkFor = model.WorkFor,
+                    WorkForId = model.WorkForId
+                };
+
+                var count = _employeeRepository.Add(employee);
                 if (count > 0)
                 {
                     TempData["Message"] = "Employee is created successfully";
@@ -97,7 +126,7 @@ namespace Company.PL.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit([FromRoute] int? id, Employee model)
+        public IActionResult Edit([FromRoute] int? id, EmployeeViewModel model)
         {
             try
             {
@@ -105,7 +134,23 @@ namespace Company.PL.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    var count = _employeeRepository.Update(model);
+                    Employee employee = new Employee()
+                    {
+                        Name = model.Name,
+                        Address = model.Address,
+                        Age = model.Age,
+                        Salary = model.Salary,
+                        PhoneNumber = model.PhoneNumber,
+                        Email = model.Email,
+                        IsActive = model.IsActive,
+                        IsDeleted = model.IsDeleted,
+                        DateOfCreation = model.DateOfCreation,
+                        HiringDate = model.HiringDate,
+                        WorkFor = model.WorkFor,
+                        WorkForId = model.WorkForId
+                    };
+
+                    var count = _employeeRepository.Update(employee);
                     if (count > 0)
                     {
                         return RedirectToAction("Index");
