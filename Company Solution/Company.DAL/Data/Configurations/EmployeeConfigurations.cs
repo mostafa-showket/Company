@@ -9,6 +9,11 @@ namespace Company.DAL.Data.Configurations
         public void Configure(EntityTypeBuilder<Employee> builder)
         {
             builder.Property(E => E.Salary).HasColumnType("decimal(18,2)");
+
+            builder.HasOne(E => E.WorkFor)
+                   .WithMany(D => D.Employees)
+                   .HasForeignKey(E => E.WorkForId)
+                   .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }
