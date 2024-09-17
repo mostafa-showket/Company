@@ -2,11 +2,28 @@
 
 @{
     ViewData["Title"] = "Index";
+
+    // string s = ViewData["Message"] as string; // Required Casting
+    // string s01 = ViewBag.Message; // Doesn't require Casting
+
 }
 
 <h1>All Employees</h1>
 <br />
 <br />
+@*
+<div class="alert alert-danger">
+    <p>@ViewData["Message"]</p>
+</div>
+<div class="alert alert-warning">
+    <p>@ViewBag.Message</p>
+</div> *@
+@* @if (!string.IsNullOrEmpty(@TempData["Message"] as string))
+{
+    <div class="alert alert-success">
+        <p>@TempData["Message"]</p>
+    </div>
+} *@
 
 <a asp-controller="Employees" asp-action="Create" class="btn btn-primary mb-2">Create Employee</a>
 
@@ -35,7 +52,7 @@
                     <td>@employee.Name</td>
                     <td>@employee.Age</td>
                     <td>@employee.Address</td>
-                    <td>@Html.DisplayFor(E=> employee.Email)</td>
+                    <td>@Html.DisplayFor(E => employee.Email)</td>
                     <td>@employee.PhoneNumber</td>
                     <td>@Html.DisplayFor(E => employee.Salary)</td>
                     <td>@Html.DisplayFor(E => employee.IsActive)</td>
