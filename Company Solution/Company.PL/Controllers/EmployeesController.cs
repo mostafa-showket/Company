@@ -7,10 +7,12 @@ namespace Company.PL.Controllers
     public class EmployeesController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IDepartmentRespository _departmentRespository;
 
-        public EmployeesController(IEmployeeRepository employeeRepository)
+        public EmployeesController(IEmployeeRepository employeeRepository,IDepartmentRespository departmentRespository)
         {
             _employeeRepository = employeeRepository;
+            _departmentRespository = departmentRespository;
         }
 
         public IActionResult Index()
@@ -43,6 +45,10 @@ namespace Company.PL.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            var departments = _departmentRespository.GetAll(); // Extra Information
+
+            ViewData["Departments"] = departments;
+
             return View();
         }
 
@@ -81,6 +87,10 @@ namespace Company.PL.Controllers
         [HttpGet]
         public IActionResult Edit(int? id)
         {
+            var departments = _departmentRespository.GetAll(); 
+
+            ViewData["Departments"] = departments;
+
             return Details(id, "Edit");
         }
 
