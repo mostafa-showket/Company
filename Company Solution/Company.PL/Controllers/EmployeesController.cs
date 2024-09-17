@@ -9,15 +9,17 @@ namespace Company.PL.Controllers
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IDepartmentRespository _departmentRespository;
 
-        public EmployeesController(IEmployeeRepository employeeRepository,IDepartmentRespository departmentRespository)
+        public EmployeesController(IEmployeeRepository employeeRepository, IDepartmentRespository departmentRespository)
         {
             _employeeRepository = employeeRepository;
             _departmentRespository = departmentRespository;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string searchInput)
         {
-            var employees = _employeeRepository.GetAll();
+            var employees = Enumerable.Empty<Employee>();
+            if (string.IsNullOrEmpty(searchInput)) employees = _employeeRepository.GetAll();
+            else employees = _employeeRepository.GetByName(searchInput);
 
             //string Message = "Hello World";
 
@@ -66,7 +68,7 @@ namespace Company.PL.Controllers
                 {
                     TempData["Message"] = "Employee didn't created successfully";
                 }
-                    return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
 
             return View();
@@ -87,7 +89,7 @@ namespace Company.PL.Controllers
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-            var departments = _departmentRespository.GetAll(); 
+            var departments = _departmentRespository.GetAll();
 
             ViewData["Departments"] = departments;
 

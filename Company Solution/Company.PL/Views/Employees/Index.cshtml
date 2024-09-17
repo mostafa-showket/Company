@@ -26,6 +26,11 @@
     </div>
 } *@
 
+<form class="d-flex flex-direction-row justify-content-center gap-2 mb-3">
+        <input type="text" name="searchInput" class="form-control w-50" placeholder="Search By Name"/>
+        <input type="submit" value="Search" class="btn btn-success" />
+</form>
+
 <a asp-controller="Employees" asp-action="Create" class="btn btn-primary mb-2">Create Employee</a>
 
 @if (Model.Count() > 0)

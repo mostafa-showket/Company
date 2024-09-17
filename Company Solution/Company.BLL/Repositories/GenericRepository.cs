@@ -7,7 +7,7 @@ namespace Company.BLL.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
-        public AppDbContext _context;
+        private protected AppDbContext _context;
 
         public GenericRepository(AppDbContext context)
         {
