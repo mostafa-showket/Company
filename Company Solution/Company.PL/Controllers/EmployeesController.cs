@@ -10,7 +10,6 @@ namespace Company.PL.Controllers
     public class EmployeesController : Controller
     {
         private readonly IUnitOfwork _unitOfwork;
-
         //private readonly IEmployeeRepository _employeeRepository;
         //private readonly IDepartmentRespository _departmentRespository;
         private readonly IMapper _mapper;
@@ -98,7 +97,9 @@ namespace Company.PL.Controllers
 
                 Employee employee = _mapper.Map<Employee>(model);
 
-                var count = _unitOfwork.EmployeeRepository.Add(employee);
+                _unitOfwork.EmployeeRepository.Add(employee);
+                var count = _unitOfwork.Complete();
+
                 if (count > 0)
                 {
                     TempData["Message"] = "Employee is created successfully";
@@ -162,7 +163,8 @@ namespace Company.PL.Controllers
 
                     Employee employee = _mapper.Map<Employee>(model);
 
-                    var count = _unitOfwork.EmployeeRepository.Update(employee);
+                    _unitOfwork.EmployeeRepository.Update(employee);
+                    var count = _unitOfwork.Complete();
                     if (count > 0)
                     {
                         return RedirectToAction("Index");
@@ -194,7 +196,8 @@ namespace Company.PL.Controllers
                 {
                     Employee employee = _mapper.Map<Employee>(model);
 
-                    var count = _unitOfwork.EmployeeRepository.Delete(model);
+                    _unitOfwork.EmployeeRepository.Delete(model);
+                    var count = _unitOfwork.Complete();
                     if (count > 0)
                     {
                         return RedirectToAction("Index");

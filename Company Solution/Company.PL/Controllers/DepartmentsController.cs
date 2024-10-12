@@ -32,8 +32,10 @@ namespace Company.PL.Controllers
         {
             if (ModelState.IsValid)
             {
-                var Count = _unitOfwork.DepartmentRespository.Add(model);
-                if (Count > 0)
+                _unitOfwork.DepartmentRespository.Add(model);
+                var count = _unitOfwork.Complete(); 
+                
+                if (count > 0)
                 {
                     return RedirectToAction("Index");
                 }
@@ -74,8 +76,10 @@ namespace Company.PL.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    var Count = _unitOfwork.DepartmentRespository.Update(model);
-                    if (Count > 0)
+                    _unitOfwork.DepartmentRespository.Update(model);
+                    var count = _unitOfwork.Complete(); 
+                    
+                    if (count > 0)
                     {
                         return RedirectToAction("Index");
                     }
@@ -111,8 +115,9 @@ namespace Company.PL.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    var Count = _unitOfwork.DepartmentRespository.Delete(model);
-                    if (Count > 0)
+                    _unitOfwork.DepartmentRespository.Delete(model);
+                    var count = _unitOfwork.Complete();
+                    if (count > 0)
                     {
                         return RedirectToAction("Index");
                     }

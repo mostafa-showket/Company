@@ -3,7 +3,6 @@
     public static class DocumentSettings
     {
         // 1. Upload
-
         public static string Upload(IFormFile file, string folderName)
         {
             // 1. Get Location of Folder

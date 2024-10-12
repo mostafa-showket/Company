@@ -20,5 +20,8 @@ namespace Company.BLL
         public IEmployeeRepository EmployeeRepository => _employeeRepository;
 
         public IDepartmentRespository DepartmentRespository => _departmentRespository;
+
+        public int Complete() => _context.SaveChanges();
+
     }
 }
