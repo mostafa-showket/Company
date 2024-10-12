@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Company.DAL.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241012195320_AddEmployeeImage")]
+    [Migration("20241012230534_AddEmployeeImage")]
     partial class AddEmployeeImage
     {
         /// <inheritdoc />
@@ -74,6 +74,9 @@ namespace Company.DAL.Data.Migrations
                     b.Property<DateTime>("HiringDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -86,9 +89,6 @@ namespace Company.DAL.Data.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PictureName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Salary")

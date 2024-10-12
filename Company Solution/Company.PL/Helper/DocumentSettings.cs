@@ -8,7 +8,7 @@
             // 1. Get Location of Folder
             //string folderPath = $"C:\\Users\\mosta\\work\\Company\\Company Solution\\Company.PL\\wwwroot\\files\\images\\{folderName}";
             //string folderPath = Directory.GetCurrentDirectory() + $"\\wwwroot\\files\\images\\{folderName}";
-            string folderPath = Path.Combine(Directory.GetCurrentDirectory(), $"\\wwwroot\\files\\images\\{folderName}");
+            string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "files", folderName);
 
             // 2. Get File Name and Make it Unique
             string fileName = $"{Guid.NewGuid()}{file.FileName}";

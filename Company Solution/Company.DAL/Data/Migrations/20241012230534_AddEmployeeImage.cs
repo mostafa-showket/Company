@@ -11,7 +11,7 @@ namespace Company.DAL.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "PictureName",
+                name: "ImageName",
                 table: "Employees",
                 type: "nvarchar(max)",
                 nullable: true);
@@ -21,7 +21,7 @@ namespace Company.DAL.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "PictureName",
+                name: "ImageName",
                 table: "Employees");
         }
     }

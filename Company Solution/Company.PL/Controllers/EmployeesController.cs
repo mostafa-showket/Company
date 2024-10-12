@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Company.BLL;
 using Company.DAL.Models;
+using Company.PL.Helper;
 using Company.PL.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.ObjectModel;
@@ -76,6 +77,8 @@ namespace Company.PL.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (model.Image is not null) model.ImageName = DocumentSettings.Upload(model.Image, "images");
+
                 // Casting : EmployeeViewModel --> Employee
                 // Manual Mapping 
 
@@ -145,6 +148,7 @@ namespace Company.PL.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    if (model.Image is not null) model.ImageName = DocumentSettings.Upload(model.Image, "images");
                     //Employee employee = new Employee()
                     //{
                     //    Name = model.Name,

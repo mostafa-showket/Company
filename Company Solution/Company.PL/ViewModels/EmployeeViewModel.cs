@@ -1,4 +1,5 @@
 ﻿using Company.DAL.Models;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Company.PL.ViewModels
@@ -29,5 +30,9 @@ namespace Company.PL.ViewModels
 
         public int? WorkForId { get; set; } // FK
         public Department? WorkFor { get; set; } // Navigational Property
+
+        public IFormFile? Image { get; set; }
+        [DisplayName("PictureName")]
+        public string? ImageName { get; set; }
     }
 }

@@ -71,6 +71,9 @@ namespace Company.DAL.Data.Migrations
                     b.Property<DateTime>("HiringDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -83,9 +86,6 @@ namespace Company.DAL.Data.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PictureName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Salary")

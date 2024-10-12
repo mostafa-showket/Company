@@ -9,7 +9,7 @@ namespace Company.DAL.Models
         public double Salary { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public string? PictureName { get; set; }
+        public string? ImageName { get; set; }
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime HiringDate { get; set; }
