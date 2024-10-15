@@ -1,5 +1,4 @@
 ﻿using Company.BLL;
-using Company.BLL.Interfaces;
 using Company.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,9 +13,9 @@ namespace Company.PL.Controllers
             _unitOfwork = unitOfwork;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var departments = _unitOfwork.DepartmentRespository.GetAll();
+            var departments = await _unitOfwork.DepartmentRespository.GetAllAsync();
             return View(departments);
         }
 
@@ -28,13 +27,13 @@ namespace Company.PL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Department model)
+        public async Task<IActionResult> Create(Department model)
         {
             if (ModelState.IsValid)
             {
-                _unitOfwork.DepartmentRespository.Add(model);
-                var count = _unitOfwork.Complete(); 
-                
+                await _unitOfwork.DepartmentRespository.AddAsync(model);
+                var count = await _unitOfwork.CompleteAsync();
+
                 if (count > 0)
                 {
                     return RedirectToAction("Index");
@@ -44,10 +43,10 @@ namespace Company.PL.Controllers
             return View(model);
         }
 
-        public IActionResult Details(int? id, string viewName = "Details")
+        public async Task<IActionResult> Details(int? id, string viewName = "Details")
         {
             if (id is null) return BadRequest(); // 400
-            var department = _unitOfwork.DepartmentRespository.Get(id.Value);
+            var department = await _unitOfwork.DepartmentRespository.GetAsync(id.Value);
 
             if (department is null) return NotFound(); // 404
 
@@ -55,7 +54,7 @@ namespace Company.PL.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             //if (id is null) return BadRequest(); // 400
             //var department = _departmentRepositry.Get(id.Value);
@@ -63,12 +62,12 @@ namespace Company.PL.Controllers
             //if (department is null) return NotFound(); // 404
 
             //return View(department);
-            return Details(id, "Edit");
+            return await Details(id, "Edit");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([FromRoute] int? id, Department model)
+        public async Task<IActionResult> Edit([FromRoute] int? id, Department model)
         {
             try
             {
@@ -77,8 +76,8 @@ namespace Company.PL.Controllers
                 if (ModelState.IsValid)
                 {
                     _unitOfwork.DepartmentRespository.Update(model);
-                    var count = _unitOfwork.Complete(); 
-                    
+                    var count = await _unitOfwork.CompleteAsync();
+
                     if (count > 0)
                     {
                         return RedirectToAction("Index");
@@ -94,7 +93,7 @@ namespace Company.PL.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             //if (id is null) return BadRequest(); // 400
             //var department = _departmentRepositry.Get(id.Value);
@@ -102,12 +101,12 @@ namespace Company.PL.Controllers
             //if (department is null) return NotFound(); // 404
 
             //return View(department);
-            return Details(id, "Delete");
+            return await Details(id, "Delete");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete([FromRoute] int? id, Department model)
+        public async Task<IActionResult> Delete([FromRoute] int? id, Department model)
         {
             try
             {
@@ -116,7 +115,7 @@ namespace Company.PL.Controllers
                 if (ModelState.IsValid)
                 {
                     _unitOfwork.DepartmentRespository.Delete(model);
-                    var count = _unitOfwork.Complete();
+                    var count = await _unitOfwork.CompleteAsync();
                     if (count > 0)
                     {
                         return RedirectToAction("Index");

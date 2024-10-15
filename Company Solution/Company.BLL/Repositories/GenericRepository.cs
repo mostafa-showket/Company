@@ -14,18 +14,18 @@ namespace Company.BLL.Repositories
             _context = context;
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            if (typeof(T) == typeof(Employee)) return (IEnumerable<T>)_context.Employees.Include(E => E.WorkFor).AsNoTracking().ToList();
+            if (typeof(T) == typeof(Employee)) return (IEnumerable<T>)await _context.Employees.Include(E => E.WorkFor).AsNoTracking().ToListAsync();
             else return _context.Set<T>().ToList();
         }
 
 
-        public T Get(int id) => _context.Set<T>().Find(id);
+        public async Task<T?> GetAsync(int id) => await _context.Set<T>().FindAsync(id);
 
-        public void Add(T entity)
+        public async Task AddAsync(T entity)
         {
-            _context.Set<T>().Add(entity);
+            await _context.Set<T>().AddAsync(entity);
         }
 
         public void Update(T entity)

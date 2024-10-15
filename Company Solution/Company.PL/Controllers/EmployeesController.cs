@@ -28,13 +28,13 @@ namespace Company.PL.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index(string searchInput)
+        public async Task<IActionResult> Index(string searchInput)
         {
             var result = Enumerable.Empty<Employee>();
             var employeesViewModel = new Collection<EmployeeViewModel>();
 
-            if (string.IsNullOrEmpty(searchInput)) result = _unitOfwork.EmployeeRepository.GetAll();
-            else result = _unitOfwork.EmployeeRepository.GetByName(searchInput);
+            if (string.IsNullOrEmpty(searchInput)) result = await _unitOfwork.EmployeeRepository.GetAllAsync();
+            else result = await _unitOfwork.EmployeeRepository.GetByNameAsync(searchInput);
 
             // AutoMapping
             var employees = _mapper.Map<IEnumerable<EmployeeViewModel>>(result);
@@ -63,9 +63,9 @@ namespace Company.PL.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var departments = _unitOfwork.DepartmentRespository.GetAll(); // Extra Information
+            var departments = await _unitOfwork.DepartmentRespository.GetAllAsync(); // Extra Information
 
             ViewData["Departments"] = departments;
 
@@ -73,7 +73,7 @@ namespace Company.PL.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(EmployeeViewModel model)
+        public async Task<IActionResult> Create(EmployeeViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -100,8 +100,8 @@ namespace Company.PL.Controllers
 
                 Employee employee = _mapper.Map<Employee>(model);
 
-                _unitOfwork.EmployeeRepository.Add(employee);
-                var count = _unitOfwork.Complete();
+                await _unitOfwork.EmployeeRepository.AddAsync(employee);
+                var count = await _unitOfwork.CompleteAsync();
 
                 if (count > 0)
                 {
@@ -118,11 +118,11 @@ namespace Company.PL.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int? id, string viewName = "Details")
+        public async Task<IActionResult> Details(int? id, string viewName = "Details")
         {
             if (id is null) return BadRequest();
 
-            var employee = _mapper.Map<EmployeeViewModel>(_unitOfwork.EmployeeRepository.Get(id.Value));
+            var employee = _mapper.Map<EmployeeViewModel>(await _unitOfwork.EmployeeRepository.GetAsync(id.Value));
 
             if (employee is null) return NotFound();
 
@@ -130,17 +130,18 @@ namespace Company.PL.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            var departments = _unitOfwork.DepartmentRespository.GetAll();
+            var departments = await _unitOfwork.DepartmentRespository.GetAllAsync();
 
             ViewData["Departments"] = departments;
 
-            return Details(id, "Edit");
+            return await Details(id, "Edit");
         }
 
         [HttpPost]
-        public IActionResult Edit([FromRoute] int? id, EmployeeViewModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit([FromRoute] int? id, EmployeeViewModel model)
         {
             try
             {
@@ -169,7 +170,7 @@ namespace Company.PL.Controllers
                     Employee employee = _mapper.Map<Employee>(model);
 
                     _unitOfwork.EmployeeRepository.Update(employee);
-                    var count = _unitOfwork.Complete();
+                    var count = await _unitOfwork.CompleteAsync();
                     if (count > 0)
                     {
                         return RedirectToAction("Index");
@@ -185,13 +186,13 @@ namespace Company.PL.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int? id)
+        public Task<IActionResult> Delete(int? id)
         {
             return Details(id, "Delete");
         }
 
         [HttpPost]
-        public IActionResult Delete([FromRoute] int? id, EmployeeViewModel model)
+        public async Task<IActionResult> Delete([FromRoute] int? id, EmployeeViewModel model)
         {
             try
             {
@@ -202,7 +203,7 @@ namespace Company.PL.Controllers
                     Employee employee = _mapper.Map<Employee>(model);
 
                     _unitOfwork.EmployeeRepository.Delete(employee);
-                    var count = _unitOfwork.Complete();
+                    var count = await _unitOfwork.CompleteAsync();
                     if (count > 0)
                     {
                         if (model.ImageName is not null) DocumentSettings.Delete(model.ImageName, "images");

@@ -21,7 +21,7 @@ namespace Company.BLL
 
         public IDepartmentRespository DepartmentRespository => _departmentRespository;
 
-        public int Complete() => _context.SaveChanges();
+        public async Task<int> CompleteAsync() => await _context.SaveChangesAsync();
 
     }
 }
