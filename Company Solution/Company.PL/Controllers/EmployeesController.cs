@@ -199,14 +199,13 @@ namespace Company.PL.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if (model.ImageName is not null) DocumentSettings.Delete(model.ImageName, "images");
-
                     Employee employee = _mapper.Map<Employee>(model);
 
                     _unitOfwork.EmployeeRepository.Delete(employee);
                     var count = _unitOfwork.Complete();
                     if (count > 0)
                     {
+                        if (model.ImageName is not null) DocumentSettings.Delete(model.ImageName, "images");
                         return RedirectToAction("Index");
                     }
                 }
