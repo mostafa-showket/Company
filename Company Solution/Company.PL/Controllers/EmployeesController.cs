@@ -148,6 +148,7 @@ namespace Company.PL.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    if (model.ImageName is not null) DocumentSettings.Delete(model.ImageName, "images");
                     if (model.Image is not null) model.ImageName = DocumentSettings.Upload(model.Image, "images");
                     //Employee employee = new Employee()
                     //{
@@ -190,7 +191,7 @@ namespace Company.PL.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete([FromRoute] int? id, Employee model)
+        public IActionResult Delete([FromRoute] int? id, EmployeeViewModel model)
         {
             try
             {
@@ -198,9 +199,11 @@ namespace Company.PL.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    if (model.ImageName is not null) DocumentSettings.Delete(model.ImageName, "images");
+
                     Employee employee = _mapper.Map<Employee>(model);
 
-                    _unitOfwork.EmployeeRepository.Delete(model);
+                    _unitOfwork.EmployeeRepository.Delete(employee);
                     var count = _unitOfwork.Complete();
                     if (count > 0)
                     {

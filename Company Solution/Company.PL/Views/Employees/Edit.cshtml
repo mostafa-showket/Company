@@ -10,6 +10,7 @@
 
 <form asp-action="Edit" enctype="multipart/form-data">
     <partial name="PartialViews/EditCreateEmployeePartialView" model="@Model" />
+    <input hidden asp-for="ImageName" />
 
     <div class="d-flex mt-4 gap-2">
         <input type="submit" value="Update" class="btn btn-primary" />

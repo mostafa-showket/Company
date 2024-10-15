@@ -27,7 +27,7 @@
         // 2. Delete
         public static void Delete(string fileName, string folderName)
         {
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), $"\\wwwroot\\files\\images\\{folderName}", fileName);
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "files", folderName, fileName);
 
             if (File.Exists(filePath)) File.Delete(filePath);
         }
