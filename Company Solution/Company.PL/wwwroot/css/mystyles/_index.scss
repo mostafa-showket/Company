@@ -1,4 +1,5 @@
 ﻿@use "../../lib/bootstrap/scss/functions"; 
 @import "../../lib/bootstrap/scss/_mixins.scss";
+@import "_formControl.scss";
 @import "_variables.scss"; // Your custom variables
 @import "../../lib/bootstrap/scss/bootstrap.scss";

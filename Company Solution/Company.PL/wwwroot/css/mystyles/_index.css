@@ -2114,9 +2114,9 @@ progress {
   line-height: 1.5;
   color: var(--bs-body-color);
   appearance: none;
-  background-color: var(--bs-body-bg);
+  background-color: #e4e4e7;
   background-clip: padding-box;
-  border: var(--bs-border-width) solid var(--bs-border-color);
+  border: var(--bs-border-width) solid #1b1b1b;
   border-radius: var(--bs-border-radius);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -2133,7 +2133,7 @@ progress {
 }
 .form-control:focus {
   color: var(--bs-body-color);
-  background-color: var(--bs-body-bg);
+  background-color: #e4e4e7;
   border-color: #8d8d8d;
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(27, 27, 27, 0.25);
@@ -2264,12 +2264,12 @@ textarea.form-control-lg {
   line-height: 1.5;
   color: var(--bs-body-color);
   appearance: none;
-  background-color: var(--bs-body-bg);
+  background-color: #e4e4e7;
   background-image: var(--bs-form-select-bg-img), var(--bs-form-select-bg-icon, none);
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 16px 12px;
-  border: var(--bs-border-width) solid var(--bs-border-color);
+  border: var(--bs-border-width) solid #1b1b1b;
   border-radius: var(--bs-border-radius);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -2338,7 +2338,7 @@ textarea.form-control-lg {
 }
 
 .form-check-input {
-  --bs-form-check-bg: var(--bs-body-bg);
+  --bs-form-check-bg: #e4e4e7;
   flex-shrink: 0;
   width: 1em;
   height: 1em;
@@ -2597,7 +2597,7 @@ textarea.form-control-lg {
   z-index: -1;
   height: 1.5em;
   content: "";
-  background-color: var(--bs-body-bg);
+  background-color: #e4e4e7;
   border-radius: var(--bs-border-radius);
 }
 .form-floating > .form-control:-webkit-autofill ~ label {
@@ -2655,7 +2655,7 @@ textarea.form-control-lg {
   text-align: center;
   white-space: nowrap;
   background-color: var(--bs-tertiary-bg);
-  border: var(--bs-border-width) solid var(--bs-border-color);
+  border: var(--bs-border-width) solid #1b1b1b;
   border-radius: var(--bs-border-radius);
 }
 
