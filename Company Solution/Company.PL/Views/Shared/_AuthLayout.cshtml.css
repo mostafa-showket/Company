@@ -1,0 +1,26 @@
+﻿.auth {
+    height: 100vh;
+    display: grid;
+    align-content: center;
+    grid-template-areas: 'photo form';
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.auth_photo {
+    grid-area: photo;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth_form {
+    grid-area: form;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: -2px 0px 26px -14px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}

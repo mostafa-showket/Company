@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Company.PL.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/mystyles/_index.css" />
+</head>
+<body>
+    <main class="auth">
+        <section class="auth_photo">
+            <img src="~/files/images/CompanyImage.png" />
+        </section>
+        <section class="auth_form">
+            @RenderBody()
+        </section>
+    </main>
+</body>
+</html>

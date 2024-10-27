@@ -1,0 +1,47 @@
+﻿@model SignUpViewModel
+
+@{
+    ViewData["Title"] = "SignUp";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<h1>Welcome</h1>
+<h6 class="text-secondary">Sign up to Explore</h6>
+<form class="d-flex flex-column" style="width:60%;">
+    <div>
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" class="form-control" placeholder="Enter your Username" />
+    </div>
+
+    <div>
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" placeholder="Enter your first name" />
+    </div>
+
+    <div>
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" placeholder="Enter your last name" />
+    </div>
+
+    <div>
+
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" placeholder="Enter your email" />
+    </div>
+
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" placeholder="Enter your password" />
+    </div>
+
+    <div>
+        <label asp-for="ConfirmPassword"></label>
+        <input asp-for="ConfirmPassword" class="form-control" placeholder="confirm password" />
+    </div>
+
+
+    <input class="btn btn-primary mt-3 w-100" type="submit" />
+    <p class="align-self-center">Already a member? <span><a asp-controller="Account" asp-action="Login">Login In</a></span></p>
+    
+</form>
+
