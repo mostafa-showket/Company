@@ -1,0 +1,39 @@
+﻿@import '../../wwwroot/lib/bootstrap/scss/_functions.scss';
+@import '../../wwwroot/lib/bootstrap/scss/_variables.scss';
+@import '../../wwwroot/lib/bootstrap/scss/_mixins.scss';
+
+.auth {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'form';
+    grid-template-rows: 1fr;
+
+    @include media-breakpoint-up(md) {
+        align-content: center;
+        grid-template-areas: 'photo form';
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.auth_photo {
+    grid-area: photo;
+    display: none;
+
+    @include media-breakpoint-up(md) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.auth_form {
+    grid-area: form;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: -2px 0px 26px -14px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
