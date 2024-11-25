@@ -1,9 +1,8 @@
 using Company.BLL;
-using Company.BLL.Interfaces;
-using Company.BLL.Repositories;
 using Company.DAL.Data.Contexts;
+using Company.DAL.Models;
 using Company.PL.Mapping;
-using Company.PL.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Company.PL
@@ -27,14 +26,13 @@ namespace Company.PL
             builder.Services.AddScoped<IUnitOfwork, UnitOfWork>();
             builder.Services.AddAutoMapper(typeof(EmployeeProfile));
 
-            // Life Time
-            //builder.Services.AddScoped();     // LifeTime Per Request, object Unreachable
-            //builder.Services.AddTransient();  // LifeTime Per Operation
-            //builder.Services.AddSingleton();  // LifeTime Per Application
+            //builder.Services.AddScoped<IScopedService, ScopedService>();            // LifeTime Per Request
+            //builder.Services.AddTransient<ITransientService, TransientService>();   // LifeTime Per Operation
+            //builder.Services.AddSingleton<ISingletonService, SingletonService>();   // LifeTime Per Application
 
-            builder.Services.AddScoped<IScopedService, ScopedService>();            // LifeTime Per Request
-            builder.Services.AddTransient<ITransientService, TransientService>();   // LifeTime Per Operation
-            builder.Services.AddSingleton<ISingletonService, SingletonService>();   // LifeTime Per Application
+            //builder.Services.AddScoped<UserManager<ApplicationUser>>();
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
 
             var app = builder.Build();
 

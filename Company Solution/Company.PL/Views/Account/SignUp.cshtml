@@ -7,38 +7,48 @@
 
 <h1>Welcome</h1>
 <h6 class="text-secondary">Sign up to Explore</h6>
-<form class="d-flex flex-column" style="width:60%;">
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form class="d-flex flex-column" style="width:60%;" asp-action="signUp">
     <div>
         <label asp-for="UserName"></label>
         <input asp-for="UserName" class="form-control" placeholder="Enter your Username" />
+        <span asp-validation-for="UserName" class="text-danger"></span>
     </div>
 
     <div>
         <label asp-for="FirstName"></label>
         <input asp-for="FirstName" class="form-control" placeholder="Enter your first name" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
 
     <div>
         <label asp-for="LastName"></label>
         <input asp-for="LastName" class="form-control" placeholder="Enter your last name" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
 
     <div>
-
         <label asp-for="Email"></label>
         <input asp-for="Email" class="form-control" placeholder="Enter your email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
 
     <div>
         <label asp-for="Password"></label>
         <input asp-for="Password" class="form-control" placeholder="Enter your password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
     </div>
 
     <div>
         <label asp-for="ConfirmPassword"></label>
         <input asp-for="ConfirmPassword" class="form-control" placeholder="confirm password" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
     </div>
 
+    <div>
+        <input asp-for="IsAgree" class="form-check-input" />
+        <span>I Agree To The Terms & Conditions</span>
+    </div>
 
     <input class="btn btn-primary mt-3 w-100" type="submit" />
     <p class="align-self-center">Already a member? <span><a asp-controller="Account" asp-action="Login">Login In</a></span></p>
